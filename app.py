@@ -687,47 +687,111 @@ if nav_choice == "01. Data & Universe":
     f_col1, f_col2 = st.columns(2)
 
     with f_col1:
-        st.markdown("""
-        <div class="funnel-card">
-            <span class="funnel-step funnel-step-blue">TẦNG 1: TỪ 99 MÃ ➔ TOP 30 MÃ THANH KHOẢN</span>
-            <div class="funnel-title">Bộ Lọc Thanh Khoản (Liquidity Screening)</div>
-            <div class="funnel-desc">
-                <b>1. Cơ sở định lượng & quy mô quỹ:</b> Trong quản trị danh mục định lượng của các định chế tài chính, thanh khoản là điều kiện tiên quyết (Gating Factor) nhằm:
-                <ul>
-                    <li>Đảm bảo khả năng giải ngân và thoái vốn nhanh chóng mà không gây trượt giá lớn (Slippage) hay tác động giá bất lợi (Market Impact Cost).</li>
-                    <li>Loại trừ triệt để các cổ phiếu vốn hóa siêu nhỏ (Penny), cổ phiếu "bo cung", thao túng giá thiếu thanh khoản thực.</li>
-                </ul>
-                <b>2. Chỉ báo sử dụng:</b> <code>60D Median Trading Value</code> — Giá trị giao dịch trung vị trong 60 phiên gần nhất tính đến cuối tập Train (31/12/2021):
-                $$\\text{Liq Value} = \\text{Median}_{t \\in [T-59, T]}(\\text{Close}_t \\times \\text{Volume}_t)$$
-                <b>3. Tại sao chọn Trung vị (Median) thay vì Trung bình (Mean)?</b><br>
-                Trung vị triệt tiêu hoàn toàn độ nhiễu của các phiên "quay tay thanh khoản" hoặc phiên đột biến khối lượng ngắn hạn, phản ánh đúng dung lượng khớp lệnh tự nhiên hàng ngày.
-                <br>➔ <b>Kết quả:</b> Chọn ra đúng <b>Top 30 cổ phiếu thanh khoản lớn nhất</b> toàn sàn HOSE.
+        with st.container(border=True):
+            st.markdown("""
+            <div style="margin-bottom: 8px;">
+                <span class="funnel-step funnel-step-blue">TẦNG 1: TỪ 99 MÃ ➔ TOP 30 MÃ THANH KHOẢN</span>
             </div>
-        </div>
-        """, unsafe_allow_html=True)
+            <div class="funnel-title">💧 Bộ Lọc Thanh Khoản (Liquidity Screening)</div>
+            """, unsafe_allow_html=True)
+
+            st.markdown("""
+            **1. Cơ sở định lượng & quy mô quỹ:**  
+            Trong quản trị danh mục định lượng của các định chế tài chính, thanh khoản là điều kiện tiên quyết (*Gating Factor*) nhằm:
+            - Đảm bảo khả năng giải ngân và thoái vốn nhanh chóng mà không gây trượt giá lớn (*Slippage*) hay tác động giá bất lợi (*Market Impact Cost*).
+            - Loại trừ triệt để các cổ phiếu vốn hóa siêu nhỏ (*Penny*), cổ phiếu "bo cung", thao túng giá thiếu thanh khoản thực.
+
+            **2. Chỉ báo sử dụng:** `60D Median Trading Value` — Giá trị giao dịch trung vị trong 60 phiên gần nhất tính đến cuối tập Train (31/12/2021):
+            """)
+            st.latex(r"\text{Liq Value} = \text{Median}_{t \in [T-59, T]}\left(\text{Close}_t \times \text{Volume}_t\right)")
+            st.markdown("""
+            **3. Tại sao chọn Trung vị (Median) thay vì Trung bình (Mean)?**  
+            Trung vị triệt tiêu hoàn toàn độ nhiễu của các phiên "quay tay thanh khoản" hoặc phiên đột biến khối lượng ngắn hạn, phản ánh đúng dung lượng khớp lệnh tự nhiên hàng ngày.
+
+            ➔ **Kết quả:** Chọn ra đúng **Top 30 cổ phiếu thanh khoản lớn nhất** toàn sàn HOSE.
+            """)
 
     with f_col2:
-        st.markdown("""
-        <div class="funnel-card">
-            <span class="funnel-step funnel-step-amber">TẦNG 2: TỪ TOP 30 MÃ ➔ TOP 20 MÃ ELIGIBLE</span>
-            <div class="funnel-title">Bộ Lọc Sức Khỏe Kỹ Thuật & Xu Hướng (Technical Filter)</div>
-            <div class="funnel-desc">
-                Từ 30 mã thanh khoản tốt nhất, áp dụng 2 tiêu chí loại trừ nhằm tránh mua đỉnh ngắn hạn và tránh cổ phiếu mất xu hướng tăng:
-                <br><br>
-                <b>Tiêu chí 1: $RSI_{14} \\le 75$ (Loại bỏ Quá Mua cực đoan):</b><br>
-                Wilder's RSI 14 phiên đo lường độ căng của động lượng giá. Nếu $RSI > 75$, cổ phiếu đang ở vùng quá nóng (Extreme Overbought), đối mặt rủi ro điều chỉnh phân kỳ âm cực lớn.
-                <br><br>
-                <b>Tiêu chí 2: Giá đóng cửa $\\ge SMA_{50}$ (Bảo toàn Xu hướng Tăng):</b><br>
-                $$\\text{px\\_vs\\_sma50} = \\frac{P_t}{SMA_{50}} - 1 \\ge 0$$
-                Cổ phiếu bắt buộc phải giao dịch trên đường trung bình động 50 ngày. Nếu giá nằm dưới SMA50, xung lực tăng đã bị phá vỡ, cổ phiếu bước vào pha phân phối/downtrend ngắn-trung hạn.
-                <br><br>
-                ➔ <b>Kết quả:</b> Loại chính xác <b>10 cổ phiếu</b> (gồm các bluechips bị gãy trend), giữ lại <b>Top 20 cổ phiếu Đủ Điều Kiện (Eligible Universe)</b>.
+        with st.container(border=True):
+            st.markdown("""
+            <div style="margin-bottom: 8px;">
+                <span class="funnel-step funnel-step-amber">TẦNG 2: TỪ TOP 30 MÃ ➔ TOP 20 MÃ ELIGIBLE</span>
             </div>
-        </div>
-        """, unsafe_allow_html=True)
+            <div class="funnel-title">🛡️ Bộ Lọc Sức Khỏe Kỹ Thuật & Xu Hướng (Technical Filter)</div>
+            """, unsafe_allow_html=True)
+
+            st.markdown("""
+            Từ 30 mã thanh khoản tốt nhất, áp dụng 2 tiêu chí loại trừ nhằm tránh mua đỉnh ngắn hạn và tránh cổ phiếu mất xu hướng tăng:
+
+            **Tiêu chí 1: $RSI_{14} \le 75$ (Loại bỏ Quá Mua cực đoan):**  
+            Wilder's RSI 14 phiên đo lường độ căng của động lượng giá. Nếu $RSI > 75$, cổ phiếu đang ở vùng quá nóng (*Extreme Overbought*), đối mặt rủi ro điều chỉnh phân kỳ âm cực lớn.
+
+            **Tiêu chí 2: Giá đóng cửa $\ge SMA_{50}$ (Bảo toàn Xu hướng Tăng):**
+            """)
+            st.latex(r"\text{px\_vs\_sma50} = \frac{P_t}{SMA_{50}} - 1 \ge 0")
+            st.markdown("""
+            Cổ phiếu bắt buộc phải giao dịch trên đường trung bình động 50 ngày ($P_t \ge SMA_{50}$). Nếu giá nằm dưới $SMA_{50}$, xung lực tăng đã bị phá vỡ, cổ phiếu bước vào pha phân phối/downtrend ngắn-trung hạn.
+
+            ➔ **Kết quả:** Loại chính xác **10 cổ phiếu** (gồm các bluechips bị gãy trend), giữ lại **Top 20 cổ phiếu Đủ Điều Kiện (Eligible Universe)**.
+            """)
 
     st.markdown("---")
-    st.markdown("### 2. Danh Sách Chi Tiết 10 Cổ Phiếu Bị Loại Khỏi Top 30")
+    st.markdown("### 2. Chi Tiết Các Chỉ Số Phân Tích Kỹ Thuật Dùng Cho Bộ Lọc & Chấm Điểm")
+    st.markdown("""
+    Toàn bộ hệ thống định lượng được vận hành dựa trên **6 chỉ báo kỹ thuật cốt lõi**, được tính toán thuần túy trên tập In-Sample (Train 2020–2021) nhằm đảm bảo nguyên tắc không rò rỉ dữ liệu (*No Look-ahead Bias*):
+    """)
+
+    c_ind1, c_ind2, c_ind3 = st.columns(3)
+    with c_ind1:
+        with st.container(border=True):
+            st.markdown("##### 💧 1. 60D Median Trading Value")
+            st.latex(r"\text{Liq Value} = \text{Median}_{60}(\text{Close} \times \text{Vol})")
+            st.markdown("""
+            - **Ý nghĩa:** Đo lường quy mô thanh khoản thực, triệt tiêu giao dịch đột biến bất thường.
+            - **Ứng dụng:** Bộ lọc Gating Tầng 1 (lấy Top 30) & chiếm 20% điểm Composite ở Stage 2.
+            """)
+        with st.container(border=True):
+            st.markdown("##### 📈 2. Giá vs. SMA50 (Short/Mid Trend)")
+            st.latex(r"\text{px\_vs\_sma50} = \frac{P_t}{SMA_{50}(P_t)} - 1")
+            st.markdown("""
+            - **Ý nghĩa:** Xác định vị thế giá so với xu hướng bình quân 50 ngày gần nhất.
+            - **Ứng dụng:** Điều kiện Tầng 2 ($\ge 0$) & chiếm 50% điểm thành phần Trend ở Stage 2.
+            """)
+
+    with c_ind2:
+        with st.container(border=True):
+            st.markdown("##### ⚡ 3. Wilder's RSI 14 (Động Lượng)")
+            st.latex(r"RSI_{14} = 100 - \frac{100}{1 + \frac{\text{EMA}_{14}(\text{Gain})}{\text{EMA}_{14}(\text{Loss})}}")
+            st.markdown("""
+            - **Ý nghĩa:** Đo lường vận tốc và mức độ biến thiên giá theo công thức chuẩn J. Welles Wilder.
+            - **Ứng dụng:** Điều kiện Tầng 2 ($\le 75$) & Factor Momentum (ưu tiên xung lực quanh mốc 60).
+            """)
+        with st.container(border=True):
+            st.markdown("##### 🌟 4. SMA50 vs. SMA200 (Long-term Trend)")
+            st.latex(r"\text{sma50\_vs\_sma200} = \frac{SMA_{50}(P_t)}{SMA_{200}(P_t)} - 1")
+            st.markdown("""
+            - **Ý nghĩa:** Cấu trúc Golden Cross kinh điển, xác nhận xu hướng tăng dài hạn bền vững.
+            - **Ứng dụng:** Chiếm 50% điểm thành phần Trend trong mô hình Multi-Factor ở Stage 2.
+            """)
+
+    with c_ind3:
+        with st.container(border=True):
+            st.markdown("##### 🚀 5. Momentum 6 Tháng (Lag 1 Tháng)")
+            st.latex(r"\text{mom\_6m} = \frac{P_{T-21}}{P_{T-126}} - 1")
+            st.markdown("""
+            - **Ý nghĩa:** Tỷ suất sinh lợi từ tháng $T-6$ đến $T-1$, loại trừ tháng $T$ gần nhất.
+            - **Ứng dụng:** Triệt tiêu hiện tượng đảo chiều ngắn hạn (*Short-term reversal*); Factor Momentum.
+            """)
+        with st.container(border=True):
+            st.markdown("##### 🛡️ 6. Độ Biến Động Ngày (Volatility)")
+            st.latex(r"\sigma_{\text{daily}} = \sqrt{\frac{1}{N-1}\sum_{t=1}^N (R_t - \bar{R})^2}")
+            st.markdown("""
+            - **Ý nghĩa:** Độ lệch chuẩn mẫu của lợi suất ngày, phản ánh rủi ro dao động giá.
+            - **Ứng dụng:** Factor Risk ở Stage 2 (ưu tiên cổ phiếu có độ biến động thấp hơn).
+            """)
+
+    st.markdown("---")
+    st.markdown("### 3. Danh Sách Chi Tiết 10 Cổ Phiếu Bị Loại Khỏi Top 30")
     st.markdown("""
     Bảng dưới đây minh chứng tính khách quan của thuật toán: Dù đều là những doanh nghiệp hàng đầu thị trường với thanh khoản hàng trăm tỷ đồng mỗi phiên, **cả 10 mã đều bị loại thẳng tay vì vi phạm điều kiện $P < SMA_{50}$** (Giá gãy xuống dưới đường trung bình 50 ngày tại phiên cuối Train):
     """)
@@ -756,7 +820,7 @@ if nav_choice == "01. Data & Universe":
     )
 
     st.markdown("---")
-    st.markdown(f"### 3. Danh Sách 20 Cổ Phiếu Đủ Điều Kiện (Eligible Universe: {len(eligible)} Mã)")
+    st.markdown(f"### 4. Danh Sách 20 Cổ Phiếu Đủ Điều Kiện (Eligible Universe: {len(eligible)} Mã)")
     st.markdown("Đây là 20 mã vượt qua 2 tầng sàng lọc khắt khe, kết hợp hài hòa giữa **Thanh khoản vượt trội** và **Động lượng xu hướng lành mạnh**:")
 
     disp_el = eligible.sort_values("liq_value", ascending=False).copy().reset_index()
@@ -782,7 +846,7 @@ if nav_choice == "01. Data & Universe":
     )
 
     # Interactive Bubble / Scatter chart of Universe
-    st.markdown("### 4. Bản Đồ Trực Quan: Thanh Khoản vs. Biến Động Top 30 Cổ Phiếu")
+    st.markdown("### 5. Bản Đồ Trực Quan: Thanh Khoản vs. Biến Động Top 30 Cổ Phiếu")
     scatter_df = pool.copy().reset_index()
     scatter_df["Status"] = np.where(scatter_df["ticker"].isin(eligible.index), "Đủ điều kiện (Eligible Universe: 20 mã)", "Bị loại (Filtered Out: 10 mã)")
     scatter_df["liq_bil"] = scatter_df["liq_value"] / 1e9
