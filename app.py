@@ -689,7 +689,7 @@ if nav_choice == "01. Data & Universe":
     # Overview Metrics
     m1, m2, m3, m4 = st.columns(4)
     with m1:
-        st.metric("Vũ Trụ Ban Đầu (HOSE)", f"{px_all.shape[1]} cổ phiếu", help="Cổ phiếu có dữ liệu giao dịch >= 90% số phiên trên sàn HOSE")
+        st.metric("Dữ liệu ban đầu (HOSE)", f"{px_all.shape[1]} cổ phiếu", help="Cổ phiếu có dữ liệu giao dịch >= 90% số phiên trên sàn HOSE")
     with m2:
         st.metric("Giai đoạn Train (In-Sample)", "2020 - 2021 (502 phiên)", help="Dữ liệu dùng để tính chỉ báo, chấm điểm và tối ưu hóa danh mục")
     with m3:
