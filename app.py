@@ -1026,7 +1026,7 @@ elif nav_choice == "03. Portfolio Strategy":
                 <b>Tín hiệu định thời điểm (VNINDEX SMA200):</b><br>
                 - Khi $VNINDEX > SMA200$ ➔ <b>INVEST (Tham gia thị trường)</b>.<br>
                 - Khi $VNINDEX <= SMA200$ ➔ <b>CASH (Đứng ngoài giữ 100% tiền mặt)</b>.<br>
-                - Tín hiệu trễ 1 ngày ($t-1$) triệt tiêu hoàn toàn Look-ahead bias.
+                - Tín hiệu trễ 1 ngày (t-1) triệt tiêu hoàn toàn Look-ahead bias.
                 </p>
             </div>
             """, unsafe_allow_html=True)
