@@ -209,22 +209,6 @@ st.markdown("""
         overflow: hidden;
         font-size: 13px !important;
     }
-
-        /* Metric: giá trị (dòng chữ lớn) */
-    [data-testid="stMetricValue"],
-    [data-testid="stMetricValue"] > div {
-        font-size: 1.2rem !important;     /* chỉnh số này: nhỏ hơn = 1rem, lớn hơn = 1.5rem */
-        white-space: pre-line !important; /* cho phép \n xuống dòng */
-        overflow: visible !important;
-        text-overflow: clip !important;
-        line-height: 1.3 !important;
-    }
-
-    /* Metric: nhãn (dòng chữ nhỏ phía trên) */
-    [data-testid="stMetricLabel"] p {
-        font-size: 0.8rem !important;
-    }
-
 </style>
 """, unsafe_allow_html=True)
 
@@ -649,7 +633,7 @@ with st.sidebar:
             "02. Stock Selection",
             "03. Portfolio Strategy",
             "04. Backtest & Decision",
-            "05. Final Investment Strategy Recommendation",
+            "05. Tổng Quan & Khuyến Nghị",
         ],
         index=0
     )
@@ -689,7 +673,7 @@ if nav_choice == "01. Data & Universe":
     # Overview Metrics
     m1, m2, m3, m4 = st.columns(4)
     with m1:
-        st.metric("Dữ liệu ban đầu (HOSE)", f"{px_all.shape[1]} cổ phiếu", help="Cổ phiếu có dữ liệu giao dịch >= 90% số phiên trên sàn HOSE")
+        st.metric("Vũ Trụ Ban Đầu (HOSE)", f"{px_all.shape[1]} cổ phiếu", help="Cổ phiếu có dữ liệu giao dịch >= 90% số phiên trên sàn HOSE")
     with m2:
         st.metric("Giai đoạn Train (In-Sample)", "2020 - 2021 (502 phiên)", help="Dữ liệu dùng để tính chỉ báo, chấm điểm và tối ưu hóa danh mục")
     with m3:
@@ -1041,8 +1025,8 @@ elif nav_choice == "03. Portfolio Strategy":
                 <p style="margin: 0; color: #334155;">
                 <b>Tín hiệu định thời điểm (VNINDEX SMA200):</b><br>
                 - Khi $VNINDEX > SMA200$ ➔ <b>INVEST (Tham gia thị trường)</b>.<br>
-                - Khi $VNINDEX <= SMA200$ ➔ <b>CASH (Đứng ngoài giữ 100% tiền mặt)</b>.<br>
-                - Tín hiệu trễ 1 ngày (t-1) triệt tiêu hoàn toàn Look-ahead bias.
+                - Khi $VNINDEX \le SMA200$ ➔ <b>CASH (Đứng ngoài giữ 100% tiền mặt)</b>.<br>
+                - Tín hiệu trễ 1 ngày ($t-1$) triệt tiêu hoàn toàn Look-ahead bias.
                 </p>
             </div>
             """, unsafe_allow_html=True)
@@ -1425,7 +1409,7 @@ elif nav_choice == "04. Backtest & Decision":
 # ==============================================================================
 # VIEW 5: STAGE 5 — TỔNG QUAN & KHUYẾN NGHỊ (CHỐT HẠ CHIẾN LƯỢC ĐẦU TƯ CUỐI CÙNG)
 # ==============================================================================
-elif nav_choice == "05. Conclusion & Recommendations":
+elif nav_choice == "05. Tổng Quan & Khuyến Nghị":
     st.markdown("""
     <div class="top-banner">
         <h1>TỔNG QUAN & CHIẾN LƯỢC ĐẦU TƯ KHUYẾN NGHỊ (FINAL INVESTMENT STRATEGY)</h1>
