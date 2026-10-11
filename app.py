@@ -649,7 +649,7 @@ with st.sidebar:
             "02. Stock Selection",
             "03. Portfolio Strategy",
             "04. Backtest & Decision",
-            "05. Tổng Quan & Khuyến Nghị",
+            "05. Final Investment Strategy Recommendation",
         ],
         index=0
     )
@@ -1425,7 +1425,7 @@ elif nav_choice == "04. Backtest & Decision":
 # ==============================================================================
 # VIEW 5: STAGE 5 — TỔNG QUAN & KHUYẾN NGHỊ (CHỐT HẠ CHIẾN LƯỢC ĐẦU TƯ CUỐI CÙNG)
 # ==============================================================================
-elif nav_choice == "05. Tổng Quan & Khuyến Nghị":
+elif nav_choice == "05. Conclusion & Recommendations":
     st.markdown("""
     <div class="top-banner">
         <h1>TỔNG QUAN & CHIẾN LƯỢC ĐẦU TƯ KHUYẾN NGHỊ (FINAL INVESTMENT STRATEGY)</h1>
