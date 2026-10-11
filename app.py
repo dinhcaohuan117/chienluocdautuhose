@@ -10,7 +10,7 @@ Framework 4 Giai đoạn:
             + Phần 2: Cách tiếp cận bằng Market Timing (VNINDEX SMA200)
             + Phần 3: Mô hình kết hợp Shrinkage + Market Timing
   Stage 4 — Backtest & Strategy Decision (Out-of-Sample 2022 Verification)
-  Stage 5 — Tổng Quan & Khuyến Nghị (Final Investment Strategy Recommendation)
+  Stage 5 — Final Recommendation (Final Investment Strategy Recommendation)
 ========================================================================================
 """
 
@@ -633,7 +633,7 @@ with st.sidebar:
             "02. Stock Selection",
             "03. Portfolio Strategy",
             "04. Backtest & Decision",
-            "05. Tổng Quan & Khuyến Nghị",
+            "05. Final Recommendation",
         ],
         index=0
     )
@@ -1407,9 +1407,9 @@ elif nav_choice == "04. Backtest & Decision":
 
 
 # ==============================================================================
-# VIEW 5: STAGE 5 — TỔNG QUAN & KHUYẾN NGHỊ (CHỐT HẠ CHIẾN LƯỢC ĐẦU TƯ CUỐI CÙNG)
+# VIEW 5: STAGE 5 — Final Recommendation (CHỐT HẠ CHIẾN LƯỢC ĐẦU TƯ CUỐI CÙNG)
 # ==============================================================================
-elif nav_choice == "05. Tổng Quan & Khuyến Nghị":
+elif nav_choice == "05. Final Recommendation":
     st.markdown("""
     <div class="top-banner">
         <h1>TỔNG QUAN & CHIẾN LƯỢC ĐẦU TƯ KHUYẾN NGHỊ (FINAL INVESTMENT STRATEGY)</h1>
