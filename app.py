@@ -209,6 +209,21 @@ st.markdown("""
         overflow: hidden;
         font-size: 13px !important;
     }
+
+        /* Metric: giá trị (dòng chữ lớn) */
+    [data-testid="stMetricValue"],
+    [data-testid="stMetricValue"] > div {
+        font-size: 1.5rem !important;     /* chỉnh số này: nhỏ hơn = 1rem, lớn hơn = 1.5rem */
+        white-space: pre-line !important; /* cho phép \n xuống dòng */
+        overflow: visible !important;
+        text-overflow: clip !important;
+        line-height: 1.3 !important;
+    }
+
+    /* Metric: nhãn (dòng chữ nhỏ phía trên) */
+    [data-testid="stMetricLabel"] p {
+        font-size: 0.8rem !important;
+    }
 </style>
 """, unsafe_allow_html=True)
 
