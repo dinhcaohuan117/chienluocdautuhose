@@ -210,11 +210,6 @@ st.markdown("""
         font-size: 13px !important;
     }
 
-    [data-testid="stMetricValue"] {
-        white-space: pre-line;   /* cho phép \n xuống dòng */
-        overflow: visible;
-        text-overflow: clip;
-    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -681,7 +676,7 @@ if nav_choice == "01. Data & Universe":
     with m1:
         st.metric("Vũ Trụ Ban Đầu (HOSE)", f"{px_all.shape[1]} cổ phiếu", help="Cổ phiếu có dữ liệu giao dịch >= 90% số phiên trên sàn HOSE")
     with m2:
-        st.metric("Giai đoạn Train (In-Sample)", "2020 - 2021" \n "(502 phiên)", help="Dữ liệu dùng để tính chỉ báo, chấm điểm và tối ưu hóa danh mục")
+        st.metric("Giai đoạn Train (In-Sample)", "2020 - 2021 (502 phiên)", help="Dữ liệu dùng để tính chỉ báo, chấm điểm và tối ưu hóa danh mục")
     with m3:
         st.metric("Tầng 1: Lọc Thanh Khoản", "Top 30 Cổ Phiếu", help="Top 30 mã có giá trị giao dịch trung vị 60 phiên cao nhất")
     with m4:
