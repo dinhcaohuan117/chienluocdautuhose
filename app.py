@@ -2048,7 +2048,7 @@ elif nav_choice == "06. Điều chỉnh theo góp ý thầy":
         (NVL, PDR bám sát ngay sau). Tỷ lệ này cần được trình bày như một quy tắc thiết kế, không phải số liệu ước lượng từ dữ liệu.
         """)
 
-        st.markdown("#### A.4. Đề xuất bổ sung: trọng số theo Information Coefficient (IC)")
+        st.markdown("#### Phương pháp tối ưu trọng số theo Information Coefficient (IC)")
         st.markdown("""
         Đề xuất này vận dụng khung lý thuyết của Grinold và Kahn, *Active Portfolio Management* — giáo trình chuẩn của môn học.
         Giá trị của một tín hiệu được đo bằng **Information Coefficient (IC)**: hệ số tương quan giữa điểm dự báo của tín hiệu
@@ -2136,7 +2136,7 @@ elif nav_choice == "06. Điều chỉnh theo góp ý thầy":
         seg_rows = [{"Đoạn": k, "Tĩnh": f"{v[0]:.2%}", "Walk Forward": f"{v[1]:.2%}"} for k, v in fb["segments"].items()]
         st.dataframe(pd.DataFrame(seg_rows), use_container_width=True)
         st.warning(f"""
-        **Kết luận mục B.1–B.2 — và giới hạn phải trình bày rõ:** Walk Forward cải thiện Test 2022 sau phí (+4,36 điểm phần trăm ở phí 0,15%,
+        **Kết luận mục — và giới hạn:** Walk Forward cải thiện Test 2022 sau phí (+4,36 điểm phần trăm ở phí 0,15%,
         Sharpe -0,93 so với -1,09), và lợi thế còn nguyên khi phí tăng gấp đôi lên 0,30%. Tuy nhiên, toàn bộ chênh lệch đến từ **đúng một lần
         tái cấu trúc có hiệu lực (31/03, giao dịch 01/04)**: tín hiệu Market Timing năm 2022 chỉ đổi chiều một lần (bán toàn bộ 20/04,
         đầu tư {fb['sig_invested_days']}/{fb['sig_total_days']} phiên), nên hai lần tái cấu trúc 30/06 và 30/09 diễn ra lúc đang giữ tiền mặt
@@ -2144,7 +2144,7 @@ elif nav_choice == "06. Điều chỉnh theo góp ý thầy":
         Walk Forward vì vậy được trình bày như một **quy tắc vận hành có bằng chứng ủng hộ**, chưa phải chứng minh nó luôn thắng danh mục tĩnh.
         """)
 
-        st.markdown("#### B.3. Walk Forward với trọng số IC tái tính mỗi quý")
+        st.markdown("#### Phương pháp Walk Forward với trọng số IC tái tính mỗi quý")
         st.markdown("""
         Tại mỗi ngày tái cấu trúc, trọng số IC được ước lượng lại từ các kỳ quan sát hàng tháng mà kỳ forward 63 phiên
         đã kết thúc tại ngày đó (chỉ dùng dữ liệu quá khứ). Quy tắc gán trọng số và quy tắc dự phòng như mục A.4.
